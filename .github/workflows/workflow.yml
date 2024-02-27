@@ -1,0 +1,26 @@
+name: POC Teste de Performance
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  test-perf:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout do Código
+      uses: actions/checkout@v2
+
+    - name: Instalar k6
+      run: sudo apt-get install k6
+
+    - name: Executar Testes de Performance com k6
+      run: k6 run script.js
+
+    - name: Instalar Dependências Python
+      run: pip install -r requirements.txt
+
+    - name: Processar Resultados com Python
+      run: python process.py
